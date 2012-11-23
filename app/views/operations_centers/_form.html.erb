@@ -1,29 +1,26 @@
-<%= form_for(@operations_center) do |f| %>
-  <% if @operations_center.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@operations_center.errors.count, "error") %> prohibited this operations_center from being saved:</h2>
-
-      <ul>
-      <% @operations_center.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @operations_center, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :unit_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :unit_id, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :unit_id %><br />
-    <%= f.select :unit_id, options_from_collection_for_select(Unit.all, :id, :name) %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                operations_centers_path, :class => 'btn' %>
   </div>
 <% end %>

@@ -1,25 +1,26 @@
-<%= form_for(@dispatch) do |f| %>
-  <% if @dispatch.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@dispatch.errors.count, "error") %> prohibited this dispatch from being saved:</h2>
-
-      <ul>
-      <% @dispatch.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @dispatch, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :team_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :team_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :task_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :task_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :person_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :person_id, :class => 'number_field' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :team_id %><br />
-    <%= f.select :team_id, options_from_collection_for_select(Team.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :task_id %><br />
-    <%= f.select :task_id, options_from_collection_for_select(Task.all, :id, :name) %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Dispatch Team' %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                dispatches_path, :class => 'btn' %>
   </div>
 <% end %>

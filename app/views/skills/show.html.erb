@@ -1,30 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Skill -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @skill.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @skill.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @skill.description %></dd>
+</dl>
 
-<p>
-  <b>Description:</b>
-  <%= @skill.description %>
-</p>
-
-People with this skill:<br>
-<% @skill.aptitudes.each do |aptitude| %>
-  <%= div_for aptitude do %>
-    <%= link_to_name aptitude.person %>
-    (<%= link_to aptitude.level, aptitude %>)
-  <% end %>
-<% end %>
-
-Teams with this skill:<br>
-<% @skill.roles.each do |role| %>
-  <%= div_for role do %>
-    <%= link_to_name role.team %>
-    (<%= link_to_name role.person %>)
-  <% end %>
-<% end %>
-
-<%= link_to 'Edit', edit_skill_path(@skill) %> |
-<%= link_to 'Back', skills_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              skills_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_skill_path(@skill), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              skill_path(@skill),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

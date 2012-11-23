@@ -1,47 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Task -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @task.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @task.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @task.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:person_id) %>:</strong></dt>
+  <dd><%= @task.person_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:unit_id) %>:</strong></dt>
+  <dd><%= @task.unit_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:scheduled_start) %>:</strong></dt>
+  <dd><%= @task.scheduled_start %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:scheduled_end) %>:</strong></dt>
+  <dd><%= @task.scheduled_end %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:actual_start) %>:</strong></dt>
+  <dd><%= @task.actual_start %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:actual_end) %>:</strong></dt>
+  <dd><%= @task.actual_end %></dd>
+</dl>
 
-<p>
-  <b>Description:</b>
-  <%= @task.description %>
-</p>
-
-<p>
-  <b>Person:</b>
-  <%= link_to_name @task.person %>
-</p>
-
-<p>
-  <b>Unit:</b>
-  <%= link_to_name @task.unit %>
-  <%= link_to_name @task.address %>
-</p>
-<%= gmaps(:markers => {:data => @task.address.to_gmaps4rails}, :map_options => {:auto_zoom => false, :zoom => 14, :detect_location => true}) %>
-
-<p>
-  <b>Scheduled start:</b>
-  <%= @task.scheduled_start %>
-</p>
-
-<p>
-  <b>Scheduled end:</b>
-  <%= @task.scheduled_end %>
-</p>
-
-<p>
-  <b>Actual start:</b>
-  <%= @task.actual_start %>
-</p>
-
-<p>
-  <b>Actual end:</b>
-  <%= @task.actual_end %>
-</p>
-
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              tasks_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_task_path(@task), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              task_path(@task),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

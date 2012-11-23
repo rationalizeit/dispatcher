@@ -1,33 +1,32 @@
-<%= form_for(@deployment) do |f| %>
-  <% if @deployment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@deployment.errors.count, "error") %> prohibited this deployment from being saved:</h2>
-
-      <ul>
-      <% @deployment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @deployment, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :city_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :city_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :team_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :team_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :start_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :start_time, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :end_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :end_time, :class => 'datetime_select' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :city_id %><br />
-    <%= f.select :city_id, options_from_collection_for_select(City.alphabetical, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :team_id %><br />
-    <%= f.select :team_id, options_from_collection_for_select(Team.alphabetical, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :start_time %><br />
-    <%= f.datetime_select :start_time %>
-  </div>
-  <div class="field">
-    <%= f.label :end_time %><br />
-    <%= f.datetime_select :end_time %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                deployments_path, :class => 'btn' %>
   </div>
 <% end %>

@@ -1,17 +1,23 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Unit -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human %></h1>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @unit.name %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
+  <dd><%= @unit.name %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address_id) %>:</strong></dt>
+  <dd><%= @unit.address_id %></dd>
+</dl>
 
-<p>
-  <b>Address:</b>
-  <%= @unit.address.name %>
-</p>
-
-<%= gmaps(:markers => {:data => @unit.address.to_gmaps4rails}, :map_options => {:auto_zoom => false, :zoom => 14, :detect_location => true}) %>
-
-
-<%= link_to 'Edit', edit_unit_path(@unit) %> |
-<%= link_to 'Back', units_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              units_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_unit_path(@unit), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              unit_path(@unit),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

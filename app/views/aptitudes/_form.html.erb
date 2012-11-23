@@ -1,33 +1,32 @@
-<%= form_for(@aptitude) do |f| %>
-  <% if @aptitude.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@aptitude.errors.count, "error") %> prohibited this aptitude from being saved:</h2>
-
-      <ul>
-      <% @aptitude.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for @aptitude, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :person_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :person_id, :class => 'number_field' %>
     </div>
-  <% end %>
+  </div>
+  <div class="control-group">
+    <%= f.label :skill_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :skill_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :level, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :level, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_area' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :person_id %><br />
-    <%= f.select :person_id, options_from_collection_for_select(Person.all, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :skill_id %><br />
-    <%= f.select :skill_id, options_from_collection_for_select(Skill.alphabetical, :id, :name) %>
-  </div>
-  <div class="field">
-    <%= f.label :level %><br />
-    <%= f.number_field :level %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                aptitudes_path, :class => 'btn' %>
   </div>
 <% end %>

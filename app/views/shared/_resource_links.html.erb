@@ -1,16 +1,28 @@
-<%= link_to 'cities', cities_path %>
-<%= link_to 'neighborhoods', neighborhoods_path %>
-<%= link_to 'streets', streets_path %>
-<%= link_to 'addresses', addresses_path %>
-<%= link_to 'units', units_path %>
-<%= link_to 'operations centers', operations_centers_path %>
-<%= link_to 'people', people_path %>
-<%= link_to 'teams', teams_path %>
-<%= link_to 'skills', skills_path %>
-<%= link_to 'roles', roles_path %>
-<%= link_to 'tasks', tasks_path %>
-<%= link_to 'dispatches', dispatches_path %>
-<%= link_to 'aptitudes', aptitudes_path %>
-<%= link_to 'assignments', assignments_path %>
-<%= link_to 'site admins', team_admins_path %>
-<%= link_to 'deployments', deployments_path %>
+
+
+<% if current_person || current_team_admin %>
+  <li><%= link_to 'Update Profile', edit_person_path(current_person) %></li>
+  <li><%= link_to 'Sign Out', destroy_person_session_path, :method => :delete %></li>
+  <li><%= link_to 'Cities', cities_path %></li>
+  <li><%= link_to 'Neighborhoods', neighborhoods_path %></li>
+  <li><%= link_to 'Streets', streets_path %></li>
+  <li><%= link_to 'Addresses', addresses_path %></li>
+  <li><%= link_to 'Units', units_path %></li>
+  <li><%= link_to 'Operations centers', operations_centers_path %></li>
+  <li><%= link_to 'People', people_path %></li>
+  <li><%= link_to 'Teams', teams_path %></li>
+  <li><%= link_to 'Skills', skills_path %></li>
+  <li><%= link_to 'Roles', roles_path %></li>
+  <li><%= link_to 'Tasks', tasks_path %></li>
+  <li><%= link_to 'Dispatches', dispatches_path %></li>
+  <li><%= link_to 'Aptitudes', aptitudes_path %></li>
+  <li><%= link_to 'Assignments', assignments_path %></li>
+  <li><%= link_to 'Aite admins', team_admins_path %></li>
+  <li><%= link_to 'Deployments', deployments_path %></li>
+<% else %>
+  <li><%= link_to 'Sign Up as a Site Admin', new_team_admin_registration_path %></li>
+  <li><%= link_to 'Sign In as Site Admin', new_team_admin_session_path %></li>
+  <li><%= link_to 'Sign Up to Receive Assistance', assistance_registration_path %></li>
+  <li><%= link_to 'Sign Up to Offer Help', new_person_registration_path %></li>
+  <li><%= link_to 'Sign In', new_person_session_path %></li>
+<% end %>

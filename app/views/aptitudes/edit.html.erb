@@ -1,6 +1,6 @@
-<h1>Editing aptitude</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @aptitude %> |
-<%= link_to 'Back', aptitudes_path %>
+<%- model_class = Aptitude -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t('helpers.titles.edit', :model => model_class.model_name.human,
+                                   :default => "Edit #{model_class.model_name.human}") %></h1>
+</div>
+<%= render :partial => 'form' %>

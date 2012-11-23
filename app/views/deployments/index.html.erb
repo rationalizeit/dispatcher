@@ -1,29 +1,42 @@
-<h1>Listing deployments</h1>
-
-<table>
-  <tr>
-    <th>City</th>
-    <th>Team</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @deployments.each do |deployment| %>
-  <tr>
-    <td><%= link_to_name deployment.city %></td>
-    <td><%= link_to_name deployment.team %></td>
-    <td><%= deployment.start_time %></td>
-    <td><%= deployment.end_time %></td>
-    <td><%= link_to 'Show', deployment %></td>
-    <td><%= link_to 'Edit', edit_deployment_path(deployment) %></td>
-    <td><%= link_to 'Destroy', deployment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Deployment -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:city_id) %></th>
+      <th><%= model_class.human_attribute_name(:team_id) %></th>
+      <th><%= model_class.human_attribute_name(:start_time) %></th>
+      <th><%= model_class.human_attribute_name(:end_time) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @deployments.each do |deployment| %>
+      <tr>
+        <td><%= link_to deployment.id, deployment_path(deployment) %></td>
+        <td><%= deployment.city_id %></td>
+        <td><%= deployment.team_id %></td>
+        <td><%= deployment.start_time %></td>
+        <td><%= deployment.end_time %></td>
+        <td><%=l deployment.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_deployment_path(deployment), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      deployment_path(deployment),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Deployment', new_deployment_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_deployment_path,
+            :class => 'btn btn-primary' %>

@@ -54,7 +54,7 @@ Dispatcher::Application.routes.draw do
 
   resources :cities
   
-  root :to => 'cities#index'
+  root :to => 'pages#home'
 
 
   # The priority is based upon order of creation:
